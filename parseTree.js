@@ -3,5 +3,6 @@ function TreeNode(name, ...children) { //passes in the name of the node and an a
     this.children = children;
 }
 
+module.exports = TreeNode;
 
 
