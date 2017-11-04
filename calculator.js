@@ -1,4 +1,7 @@
-var TreeNode = require('./parseTree.js');
+function TreeNode(name, ...children) { //passes in the name of the node and an array of its children
+    this.name= name;
+    this.children = children;
+}
 
 function Calculator() {
     this.tokenTypes = [
@@ -11,7 +14,8 @@ function Calculator() {
         ["RPAREN",    /^\)/  ]
       ];
 
-      this.tokenStream = [];
+    this.tokenStream = [];
+    
 
 }
 
@@ -93,15 +97,18 @@ Calculator.prototype.parseFactor = function() {
   }
 };
 
-var calculator = new Calculator("(3)");
+var calculator = new Calculator();
+calculator.lexer('(3)');
 
 // make a fake version of parseExpression
 var fakeExpressionTreeNode = new TreeNode("Expression", "3");
+console.dir(fakeExpressionTreeNode);
 calculator.parseExpression = function() {
   this.get(); // remove the 3 when parseFactor runs
   return fakeExpressionTreeNode;
 };
 
 var output = calculator.parseFactor();
+console.log(output);
 
 
